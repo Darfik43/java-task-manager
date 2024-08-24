@@ -52,7 +52,7 @@ public class ApplicationConfig {
                         configurer.requestMatchers("/api/v1/auth/**").permitAll()
                                 .anyRequest().authenticated())
                 .anonymous(AbstractHttpConfigurer::disable)
-                .addFilterBefore(new JwtAuthenticationFilter(tokenProvider),
+                .addFilterBefore(new JwtAuthenticationFilter(tokenProvider), // TODO
                         UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
