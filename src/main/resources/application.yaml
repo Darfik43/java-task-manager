@@ -20,3 +20,9 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+
+security:
+  jwt:
+    secret: LGFzZHYsc1tkW2V3W3F3dixzZGF2cHdleHpjdnhjdnZmd2VxZmxma2p2ZmpudWpmZVFXRVNERFBXUUV7e1dQRXtMPA==
+    access: 1
+    refresh: 30
