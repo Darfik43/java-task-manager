@@ -1,5 +1,7 @@
 package com.darfik.taskmanager.config;
 
+import com.darfik.taskmanager.security.JwtTokenFilter;
+import com.darfik.taskmanager.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +19,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfig {
+
+    private final JwtTokenProvider tokenProvider;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -52,7 +56,7 @@ public class ApplicationConfig {
                         configurer.requestMatchers("/api/v1/auth/**").permitAll()
                                 .anyRequest().authenticated())
                 .anonymous(AbstractHttpConfigurer::disable)
-                .addFilterBefore(new JwtAuthenticationFilter(tokenProvider), // TODO
+                .addFilterBefore(new JwtTokenFilter(tokenProvider),
                         UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
