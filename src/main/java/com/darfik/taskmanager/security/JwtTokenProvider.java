@@ -51,5 +51,20 @@ public class JwtTokenProvider {
                 .map(Enum::name)
                 .collect(Collectors.toList());
     }
+    
+    public String createRefreshToken(Long userId, String username) {
+        Claims claims = Jwts.claims().setSubject(username);
+        claims.put("id", userId);
+        Date now = new Date();
+        Date validity = new Date(now.getTime() + jwtProperties.getRefresh());
+        return Jwts.builder()
+                .setClaims(claims)
+                .setIssuedAt(now)
+                .setExpiration(validity)
+                .signWith(key)
+                .compact();
+    }
+
+    public JwtRespnse
 
 }
