@@ -1,8 +1,11 @@
 package com.darfik.taskmanager.security;
 
+import com.darfik.taskmanager.dto.auth.JwtResponse;
+import com.darfik.taskmanager.exception.AccessDeniedException;
 import com.darfik.taskmanager.service.UserService;
 import com.darfik.taskmanager.service.props.JwtProperties;
 import com.darfik.taskmanager.user.Role;
+import com.darfik.taskmanager.user.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -65,6 +68,20 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public JwtRespnse
+    public JwtResponse refreshUserTokens(String refreshToken) {
+        JwtResponse jwtResponse = new JwtResponse();
+        if (!validateToken(refreshToken)) {
+            throw new AccessDeniedException();
+        }
+        Long userId = Long.valueOf(getId(refreshToken));
+        User user = userService.getById(userId);
+        jwtResponse.setId(userId);
+        jwtResponse.setUsername(user.getEmail());
+        jwtResponse.setAccessToken(createAccessToken(userId, user.getEmail(), user.getRoles()));
+        jwtResponse.setRefreshToken(createRefreshToken(userId, user.getEmail()));
+        return jwtResponse;
+    }
+
+
 
 }
