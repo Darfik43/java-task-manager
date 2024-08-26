@@ -92,4 +92,15 @@ public class JwtTokenProvider {
         return !claims.getBody().getExpiration().before(new Date());
     }
 
+    private String getId(String token) {
+        return Jwts.
+                parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("id")
+                .toString();
+    }
+
 }
