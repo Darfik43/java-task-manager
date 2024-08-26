@@ -7,6 +7,7 @@ import com.darfik.taskmanager.service.props.JwtProperties;
 import com.darfik.taskmanager.user.Role;
 import com.darfik.taskmanager.user.User;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -54,7 +55,7 @@ public class JwtTokenProvider {
                 .map(Enum::name)
                 .collect(Collectors.toList());
     }
-    
+
     public String createRefreshToken(Long userId, String username) {
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("id", userId);
@@ -82,6 +83,13 @@ public class JwtTokenProvider {
         return jwtResponse;
     }
 
-
+    public boolean validateToken(String token) {
+        Jws<Claims> claims = Jwts
+                .parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token);
+        return !claims.getBody().getExpiration().before(new Date());
+    }
 
 }
