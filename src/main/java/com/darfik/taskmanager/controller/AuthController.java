@@ -35,6 +35,9 @@ public class AuthController {
         return userMapper.toDto(createdUser);
     }
 
-
+    @PostMapping("/refresh")
+    public JwtResponse refresh(@RequestBody String refreshToken) {
+        return authService.refresh(refreshToken);
+    }
 
 }
