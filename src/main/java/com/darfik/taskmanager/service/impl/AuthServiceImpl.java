@@ -11,7 +11,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public JwtResponse login(JwtRequest jwtRequest) {
-        return null;
+        return new JwtResponse();
     }
 
     @Override
