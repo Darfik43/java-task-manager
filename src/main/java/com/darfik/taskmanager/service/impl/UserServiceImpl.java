@@ -34,12 +34,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User update(User user) {
-        return null;
-    }
-
-    @Override
-    @Transactional
     public User create(User user) {
         return null;
     }
