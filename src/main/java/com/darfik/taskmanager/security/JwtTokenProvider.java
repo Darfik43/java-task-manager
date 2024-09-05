@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.security.Key;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -29,7 +30,6 @@ import java.util.stream.Collectors;
 public class JwtTokenProvider {
 
     private final JwtProperties jwtProperties;
-
     private final UserDetailsService userDetailsService;
     private final UserService userService;
     private Key key;
@@ -39,18 +39,11 @@ public class JwtTokenProvider {
         this.key = Keys.hmacShaKeyFor(jwtProperties.getSecret().getBytes());
     }
 
-    public String createAccessToken(Long userId, String username, Set<Role> roles) {
-        Claims claims = Jwts.claims().setSubject(username);
-        claims.put("id", userId);
-        claims.put("roles", resolveRoles(roles));
-        Date now = new Date();
-        Date validity = new Date(now.getTime() + jwtProperties.getAccess());
-        return Jwts.builder()
-                .setClaims(claims)
-                .setIssuedAt(now)
-                .setExpiration(validity)
-                .signWith(key)
-                .compact();
+    public String createAccessToken(Authentication authentication) {
+        Claims claims = Jwts.claims().setSubject(authentication.getName());
+        claims.put("id", userService.getByUsername(authentication.getName()).getId());
+        claims.put("roles", authentication.getAuthorities());
+        return generateToken(claims, jwtProperties.getAccess());
     }
 
     private List<String> resolveRoles(Set<Role> roles) {
@@ -62,12 +55,16 @@ public class JwtTokenProvider {
     public String createRefreshToken(Long userId, String username) {
         Claims claims = Jwts.claims().setSubject(username);
         claims.put("id", userId);
+        return generateToken(claims, jwtProperties.getRefresh());
+    }
+
+    private String generateToken(Map<String, Object> claims, long expirationMillis) {
         Date now = new Date();
-        Date validity = new Date(now.getTime() + jwtProperties.getRefresh());
+        Date expiryDate = new Date(now.getTime() + expirationMillis);
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)
-                .setExpiration(validity)
+                .setExpiration(expiryDate)
                 .signWith(key)
                 .compact();
     }
@@ -81,7 +78,7 @@ public class JwtTokenProvider {
         User user = userService.getById(userId);
         jwtResponse.setId(userId);
         jwtResponse.setEmail(user.getEmail());
-        jwtResponse.setAccessToken(createAccessToken(userId, user.getEmail(), user.getRoles()));
+        //jwtResponse.setAccessToken(createAccessToken(userId, user.getEmail(), user.getRoles()));
         jwtResponse.setRefreshToken(createRefreshToken(userId, user.getEmail()));
         return jwtResponse;
     }
@@ -121,5 +118,4 @@ public class JwtTokenProvider {
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
-
 }
