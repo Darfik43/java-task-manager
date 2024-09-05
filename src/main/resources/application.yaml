@@ -24,5 +24,5 @@ spring:
 security:
   jwt:
     secret: LGFzZHYsc1tkW2V3W3F3dixzZGF2cHdleHpjdnhjdnZmd2VxZmxma2p2ZmpudWpmZVFXRVNERFBXUUV7e1dQRXtMPA==
-    access: 1
-    refresh: 30
+    access: 900000 # 15 mins
+    refresh: 604800000 # 7 days
