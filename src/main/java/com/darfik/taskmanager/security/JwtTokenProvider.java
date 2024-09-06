@@ -39,10 +39,10 @@ public class JwtTokenProvider {
         this.key = Keys.hmacShaKeyFor(jwtProperties.getSecret().getBytes());
     }
 
-    public String createAccessToken(Authentication authentication) {
-        Claims claims = Jwts.claims().setSubject(authentication.getName());
-        claims.put("id", userService.getByUsername(authentication.getName()).getId());
-        claims.put("roles", authentication.getAuthorities());
+    public String createAccessToken(Long userId, String username, Set<Role> roles) {
+        Claims claims = Jwts.claims().setSubject(username);
+        claims.put("id", userId);
+        claims.put("roles", roles);
         return generateToken(claims, jwtProperties.getAccess());
     }
 
