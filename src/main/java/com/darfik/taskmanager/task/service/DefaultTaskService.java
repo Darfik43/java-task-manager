@@ -18,4 +18,9 @@ public class DefaultTaskService implements TaskService {
     public List<Task> findAllTasks() {
         return Collections.unmodifiableList(taskRepository.findAll());
     }
+
+    @Override
+    public Task createTask(String title, String details) {
+        return taskRepository.save(new Task(null, title, details));
+    }
 }
