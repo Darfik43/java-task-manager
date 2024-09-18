@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,5 +23,10 @@ public class DefaultTaskService implements TaskService {
     @Override
     public Task createTask(String title, String details) {
         return taskRepository.save(new Task(null, title, details));
+    }
+
+    @Override
+    public Optional<Task> findTask(Long taskId) {
+        return taskRepository.findById(taskId);
     }
 }
