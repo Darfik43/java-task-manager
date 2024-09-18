@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -28,5 +29,16 @@ public class DefaultTaskService implements TaskService {
     @Override
     public Optional<Task> findTask(Long taskId) {
         return taskRepository.findById(taskId);
+    }
+
+    @Override
+    public void updateTask(Long id, String title, String details) {
+        this.taskRepository.findById(id)
+                .ifPresentOrElse(task -> {
+                    task.setTitle(title);
+                    task.setDetails(details);
+                }, () -> {
+                    throw new NoSuchElementException();
+                });
     }
 }
