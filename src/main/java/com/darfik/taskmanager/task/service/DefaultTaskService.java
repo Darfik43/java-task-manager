@@ -41,4 +41,9 @@ public class DefaultTaskService implements TaskService {
                     throw new NoSuchElementException();
                 });
     }
+
+    @Override
+    public void deleteTask(Long id) {
+        this.taskRepository.deleteById(id);
+    }
 }
