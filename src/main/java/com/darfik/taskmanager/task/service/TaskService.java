@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface TaskService {
 
-    public List<Task> findAllTasks();
+    List<Task> findAllTasks();
+    Task createTask(String title, String details);
+
 
 }
