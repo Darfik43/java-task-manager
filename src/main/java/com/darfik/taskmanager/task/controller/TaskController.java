@@ -2,7 +2,10 @@ package com.darfik.taskmanager.task.controller;
 
 import com.darfik.taskmanager.task.entity.Task;
 import com.darfik.taskmanager.task.service.TaskService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
@@ -25,6 +28,11 @@ public class TaskController {
         return task;
     }
 
-    
+    @PatchMapping
+    public ResponseEntity<Void> updateTask(@PathVariable("taskId") Long taskId,
+                                           @Valid @RequestBody UpdateTaskPayload updateTaskPayload,
+                                           BindingResult bindingResult) {
+
+    }
 
 }
