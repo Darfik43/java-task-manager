@@ -21,8 +21,10 @@ public class TaskController {
     }
 
     @GetMapping
-    public Task findProduct() {
-
+    public Task findProduct(@ModelAttribute("task") Task task) {
+        return task;
     }
+
+    
 
 }
