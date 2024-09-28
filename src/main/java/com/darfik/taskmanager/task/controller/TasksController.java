@@ -1,18 +1,21 @@
 package com.darfik.taskmanager.task.controller;
 
+import com.darfik.taskmanager.task.dto.NewTaskPayload;
 import com.darfik.taskmanager.task.entity.Task;
 import com.darfik.taskmanager.task.service.TaskService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/products")
+@RequestMapping("/api/v1/tasks")
 public class TasksController {
 
     private final TaskService taskService;
@@ -23,8 +26,20 @@ public class TasksController {
     }
 
     @PostMapping
-    public Task createTask(NewTaskPayload newTaskPayload) {
+    public ResponseEntity<Task> createTask(@Valid @RequestBody NewTaskPayload newTaskPayload,
+                                           BindingResult bindingResult,
+                                           UriComponentsBuilder uriComponentsBuilder) {
+        if (bindingResult.hasErrors()) {
 
+        } else {
+            Task task = this.taskService.createTask(newTaskPayload.title(), newTaskPayload.details());
+            return ResponseEntity
+                    .created(uriComponentsBuilder
+                            .replacePath("/api/v1/tasks/{taskId}")
+                            .build(Map.of("taskId", task.getId())))
+                    .body(task);
+
+        }
     }
 
 }
