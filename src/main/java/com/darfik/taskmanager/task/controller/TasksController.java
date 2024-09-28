@@ -4,6 +4,7 @@ import com.darfik.taskmanager.task.entity.Task;
 import com.darfik.taskmanager.task.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +20,11 @@ public class TasksController {
     @GetMapping
     public List<Task> findTasks() {
         return taskService.findAllTasks();
+    }
+
+    @PostMapping
+    public Task createTask(NewTaskPayload newTaskPayload) {
+
     }
 
 }
