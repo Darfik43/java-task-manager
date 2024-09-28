@@ -1,12 +1,28 @@
 package com.darfik.taskmanager.task.controller;
 
+import com.darfik.taskmanager.task.entity.Task;
 import com.darfik.taskmanager.task.service.TaskService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.NoSuchElementException;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/v1/tasks/{taskId:\\d+}")
 public class TaskController {
 
     private final TaskService taskService;
+
+    @ModelAttribute
+    public Task getTask(@PathVariable("taskId") Long taskId) {
+        return this.taskService.findTask(taskId)
+                .orElseThrow(() -> new NoSuchElementException("Task is not found"));
+    }
+
+    @GetMapping
+    public Task findProduct() {
+
+    }
+
 }
