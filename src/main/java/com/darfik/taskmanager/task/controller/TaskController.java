@@ -48,7 +48,8 @@ public class TaskController {
             return ResponseEntity.badRequest()
                     .body(problemDetail);
         } else {
-            this.taskService.updateTask(taskId, updateTaskPayload.title(), updateTaskPayload.details());
+            this.taskService
+                    .updateTask(taskId, updateTaskPayload.title(), updateTaskPayload.details());
             return ResponseEntity.noContent()
                     .build();
         }
