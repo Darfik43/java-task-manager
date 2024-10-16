@@ -5,16 +5,13 @@ import com.darfik.taskmanager.task.entity.Task;
 import com.darfik.taskmanager.task.service.TaskService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 @RestController
@@ -32,19 +29,13 @@ public class TasksController {
     @PostMapping
     public ResponseEntity<?> createTask(@Valid @RequestBody NewTaskPayload newTaskPayload,
                                            BindingResult bindingResult,
-                                           UriComponentsBuilder uriComponentsBuilder,
-                                           Locale locale) {
+                                           UriComponentsBuilder uriComponentsBuilder) throws BindException {
         if (bindingResult.hasErrors()) {
-            ProblemDetail problemDetail = ProblemDetail
-                    .forStatusAndDetail(HttpStatus.BAD_REQUEST, "Bad title or details");
-            problemDetail.setProperty("errors",
-                    bindingResult.getAllErrors()
-                            .stream()
-                            .map(ObjectError::getDefaultMessage)
-                            .toList());
-
-            return ResponseEntity.badRequest()
-                    .body(problemDetail);
+            if (bindingResult instanceof BindException exception) {
+                throw exception;
+            } else {
+                throw new BindException(bindingResult);
+            }
         } else {
             Task task = this.taskService.createTask(newTaskPayload.title(), newTaskPayload.details());
             return ResponseEntity
