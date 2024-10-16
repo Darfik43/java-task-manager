@@ -5,6 +5,8 @@ import com.darfik.taskmanager.task.entity.Task;
 import com.darfik.taskmanager.task.service.TaskService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
@@ -53,6 +55,15 @@ public class TaskController {
         this.taskService.deleteTask(taskId);
         return ResponseEntity.noContent()
                 .build();
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<ProblemDetail> handleNoSuchElementException(NoSuchElementException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ProblemDetail
+                        .forStatusAndDetail(
+                                HttpStatus.NOT_FOUND,
+                                "Task not found"));
     }
 
 }
