@@ -24,5 +24,4 @@ public class BadRequestControllerAdvice {
         return ResponseEntity.badRequest()
                 .body(problemDetail);
     }
-
 }
