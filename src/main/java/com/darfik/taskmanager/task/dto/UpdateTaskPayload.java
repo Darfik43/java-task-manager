@@ -9,6 +9,5 @@ public record UpdateTaskPayload(
         String title,
         @Size(max = 1000, message = "Details can not be more than 1000 symbols")
         String details
-
 ) {
 }
