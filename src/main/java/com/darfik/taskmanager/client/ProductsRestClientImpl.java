@@ -1,8 +1,10 @@
 package com.darfik.taskmanager.client;
 
+import com.darfik.taskmanager.task.dto.NewTaskPayload;
 import com.darfik.taskmanager.task.entity.Task;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClient;
 
 import java.util.List;
@@ -28,7 +30,13 @@ public class ProductsRestClientImpl implements ProductsRestClient {
 
     @Override
     public Task createTask(String title, String details) {
-        return null;
+        return this.restClient
+                .post()
+                .uri("/api/v1/tasks")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(new NewTaskPayload(title, details))
+                .retrieve()
+                .body(Task.class);
     }
 
     @Override
