@@ -1,7 +1,7 @@
 package com.darfik.taskmanager.mapper;
 
 import com.darfik.taskmanager.dto.UserDto;
-import com.darfik.taskmanager.user.User;
+import com.darfik.taskmanager.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

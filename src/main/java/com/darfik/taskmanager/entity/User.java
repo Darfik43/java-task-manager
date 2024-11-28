@@ -1,4 +1,4 @@
-package com.darfik.taskmanager.user;
+package com.darfik.taskmanager.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

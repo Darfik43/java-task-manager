@@ -1,4 +1,4 @@
-package com.darfik.taskmanager.user;
+package com.darfik.taskmanager.entity;
 
 public enum Role {
 

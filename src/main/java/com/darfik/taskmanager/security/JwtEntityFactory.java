@@ -1,7 +1,7 @@
 package com.darfik.taskmanager.security;
 
-import com.darfik.taskmanager.user.Role;
-import com.darfik.taskmanager.user.User;
+import com.darfik.taskmanager.entity.Role;
+import com.darfik.taskmanager.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 

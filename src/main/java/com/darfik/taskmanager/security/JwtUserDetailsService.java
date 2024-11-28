@@ -1,8 +1,7 @@
 package com.darfik.taskmanager.security;
 
-import com.darfik.taskmanager.security.JwtEntityFactory;
 import com.darfik.taskmanager.service.UserService;
-import com.darfik.taskmanager.user.User;
+import com.darfik.taskmanager.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

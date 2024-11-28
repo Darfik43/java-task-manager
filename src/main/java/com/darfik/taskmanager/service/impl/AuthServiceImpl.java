@@ -5,7 +5,7 @@ import com.darfik.taskmanager.dto.auth.JwtResponse;
 import com.darfik.taskmanager.security.JwtTokenProvider;
 import com.darfik.taskmanager.service.AuthService;
 import com.darfik.taskmanager.service.UserService;
-import com.darfik.taskmanager.user.User;
+import com.darfik.taskmanager.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
