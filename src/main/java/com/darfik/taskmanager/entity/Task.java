@@ -1,4 +1,4 @@
-package com.darfik.taskmanager.task.entity;
+package com.darfik.taskmanager.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

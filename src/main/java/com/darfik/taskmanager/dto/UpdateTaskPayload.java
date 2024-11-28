@@ -1,4 +1,4 @@
-package com.darfik.taskmanager.task.dto;
+package com.darfik.taskmanager.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

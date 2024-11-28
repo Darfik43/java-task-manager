@@ -1,7 +1,8 @@
-package com.darfik.taskmanager.task.service;
+package com.darfik.taskmanager.service.impl;
 
-import com.darfik.taskmanager.task.entity.Task;
-import com.darfik.taskmanager.task.repository.TaskRepository;
+import com.darfik.taskmanager.entity.Task;
+import com.darfik.taskmanager.repository.TaskRepository;
+import com.darfik.taskmanager.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.darfik.taskmanager.task.controller;
+package com.darfik.taskmanager.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;

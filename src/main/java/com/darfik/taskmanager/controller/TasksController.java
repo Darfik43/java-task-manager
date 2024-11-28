@@ -1,8 +1,8 @@
-package com.darfik.taskmanager.task.controller;
+package com.darfik.taskmanager.controller;
 
-import com.darfik.taskmanager.task.dto.NewTaskPayload;
-import com.darfik.taskmanager.task.entity.Task;
-import com.darfik.taskmanager.task.service.TaskService;
+import com.darfik.taskmanager.dto.NewTaskPayload;
+import com.darfik.taskmanager.entity.Task;
+import com.darfik.taskmanager.service.TaskService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

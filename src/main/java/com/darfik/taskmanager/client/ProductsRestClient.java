@@ -1,6 +1,6 @@
 package com.darfik.taskmanager.client;
 
-import com.darfik.taskmanager.task.entity.Task;
+import com.darfik.taskmanager.entity.Task;
 
 import java.util.List;
 import java.util.Optional;

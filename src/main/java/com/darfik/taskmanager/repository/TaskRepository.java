@@ -1,7 +1,7 @@
-package com.darfik.taskmanager.task.repository;
+package com.darfik.taskmanager.repository;
 
 
-import com.darfik.taskmanager.task.entity.Task;
+import com.darfik.taskmanager.entity.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

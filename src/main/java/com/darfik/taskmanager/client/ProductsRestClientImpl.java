@@ -1,7 +1,7 @@
 package com.darfik.taskmanager.client;
 
-import com.darfik.taskmanager.task.dto.NewTaskPayload;
-import com.darfik.taskmanager.task.entity.Task;
+import com.darfik.taskmanager.dto.NewTaskPayload;
+import com.darfik.taskmanager.entity.Task;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
