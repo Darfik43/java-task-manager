@@ -1,11 +1,12 @@
 package com.darfik.taskmanager.service.impl;
 
-import com.darfik.taskmanager.dto.UserDto;
-import com.darfik.taskmanager.mapper.UserMapper;
-import com.darfik.taskmanager.service.UserService;
+import com.darfik.taskmanager.dto.auth.UserSignupRequest;
+import com.darfik.taskmanager.dto.auth.UserSignupResponse;
 import com.darfik.taskmanager.entity.Role;
 import com.darfik.taskmanager.entity.User;
+import com.darfik.taskmanager.mapper.UserMapper;
 import com.darfik.taskmanager.repository.UserRepository;
+import com.darfik.taskmanager.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.common.errors.ResourceNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,16 +41,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserDto create(UserDto userDto) {
-        if (userRepository.existsByEmail(userDto.getEmail())) {
+    public UserSignupResponse create(UserSignupRequest userSignupRequest) {
+        if (userRepository.existsByEmail(userSignupRequest.getEmail())) {
             throw new IllegalStateException("This email is already taken");
         }
-        if (!userDto.getPassword().equals(userDto.getPasswordConfirmation())) {
+        if (!userSignupRequest.getPassword().equals(userSignupRequest.getPasswordConfirmation())) {
             throw new IllegalStateException("Password and password confirmation do not match");
         }
 
-        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        User newUser = userMapper.toEntity(userDto);
+        userSignupRequest.setPassword(passwordEncoder.encode(userSignupRequest.getPassword()));
+        User newUser = userMapper.toEntity(userSignupRequest);
         Set<Role> roles = Set.of(Role.ROLE_USER);
         newUser.setRoles(roles);
 

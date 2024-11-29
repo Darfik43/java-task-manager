@@ -1,16 +1,16 @@
 package com.darfik.taskmanager.mapper;
 
-import com.darfik.taskmanager.dto.UserDto;
+import com.darfik.taskmanager.dto.auth.UserSignupRequest;
+import com.darfik.taskmanager.dto.auth.UserSignupResponse;
 import com.darfik.taskmanager.entity.User;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    @Mapping(target = "password", ignore = true)
-    UserDto toDto(User user);
+    //@Mapping(target = "password", ignore = true)
+    UserSignupResponse toDto(User user);
 
-    User toEntity(UserDto userDto);
+    User toEntity(UserSignupRequest userSignupRequest);
 
 }
