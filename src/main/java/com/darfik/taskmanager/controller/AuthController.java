@@ -50,7 +50,6 @@ public class AuthController {
                     )
                     .body(responseUserDto);
         }
-
     }
 
     @PostMapping("/refresh")
