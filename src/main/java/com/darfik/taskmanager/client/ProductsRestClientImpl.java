@@ -1,6 +1,6 @@
 package com.darfik.taskmanager.client;
 
-import com.darfik.taskmanager.dto.NewTaskPayload;
+import com.darfik.taskmanager.dto.task.NewTaskPayload;
 import com.darfik.taskmanager.entity.Task;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;

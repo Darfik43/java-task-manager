@@ -1,6 +1,6 @@
 package com.darfik.taskmanager.controller;
 
-import com.darfik.taskmanager.dto.NewTaskPayload;
+import com.darfik.taskmanager.dto.task.NewTaskPayload;
 import com.darfik.taskmanager.entity.Task;
 import com.darfik.taskmanager.service.TaskService;
 import jakarta.validation.Valid;
