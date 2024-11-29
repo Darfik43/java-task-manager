@@ -1,11 +1,11 @@
 package com.darfik.taskmanager.security;
 
 import com.darfik.taskmanager.dto.auth.JwtResponse;
+import com.darfik.taskmanager.entity.Role;
+import com.darfik.taskmanager.entity.User;
 import com.darfik.taskmanager.exception.AccessDeniedException;
 import com.darfik.taskmanager.service.UserService;
 import com.darfik.taskmanager.service.props.JwtProperties;
-import com.darfik.taskmanager.entity.Role;
-import com.darfik.taskmanager.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -76,9 +76,7 @@ public class JwtTokenProvider {
         }
         Long userId = Long.valueOf(getId(refreshToken));
         User user = userService.getById(userId);
-        jwtResponse.setId(userId);
-        jwtResponse.setEmail(user.getEmail());
-        //jwtResponse.setAccessToken(createAccessToken(userId, user.getEmail(), user.getRoles()));
+        //jwtResponse.setAccessToken(createAccessToken(userId, user.getEmail(), user.getRoles())); ??? Pochemu eta stroka zakommenchena??
         jwtResponse.setRefreshToken(createRefreshToken(userId, user.getEmail()));
         return jwtResponse;
     }

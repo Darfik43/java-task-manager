@@ -1,11 +1,11 @@
 package com.darfik.taskmanager.service.impl;
 
-import com.darfik.taskmanager.dto.auth.JwtRequest;
 import com.darfik.taskmanager.dto.auth.JwtResponse;
+import com.darfik.taskmanager.dto.auth.UserSignupRequest;
+import com.darfik.taskmanager.entity.User;
 import com.darfik.taskmanager.security.JwtTokenProvider;
 import com.darfik.taskmanager.service.AuthService;
 import com.darfik.taskmanager.service.UserService;
-import com.darfik.taskmanager.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,7 +21,7 @@ public class AuthServiceImpl implements AuthService {
 
 
     @Override
-    public JwtResponse login(JwtRequest loginRequest) {
+    public JwtResponse login(UserSignupRequest loginRequest) {
         JwtResponse jwtResponse = new JwtResponse();
         authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(
@@ -29,8 +29,6 @@ public class AuthServiceImpl implements AuthService {
                         loginRequest.getPassword()
                 ));
         User user = userService.getByUsername(loginRequest.getEmail());
-        jwtResponse.setId(user.getId());
-        jwtResponse.setEmail(user.getEmail());
         jwtResponse.setAccessToken(jwtTokenProvider.createAccessToken(user.getId(), user.getEmail(), user.getRoles()));
         jwtResponse.setRefreshToken(jwtTokenProvider.createRefreshToken(user.getId(), user.getEmail()));
         return jwtResponse;
