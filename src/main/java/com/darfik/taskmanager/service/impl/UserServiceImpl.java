@@ -1,6 +1,6 @@
 package com.darfik.taskmanager.service.impl;
 
-import com.darfik.taskmanager.dto.auth.UserSignupRequest;
+import com.darfik.taskmanager.dto.auth.UserSignupPayload;
 import com.darfik.taskmanager.dto.auth.UserSignupResponse;
 import com.darfik.taskmanager.entity.Role;
 import com.darfik.taskmanager.entity.User;
@@ -41,16 +41,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserSignupResponse create(UserSignupRequest userSignupRequest) {
-        if (userRepository.existsByEmail(userSignupRequest.getEmail())) {
+    public UserSignupResponse create(UserSignupPayload userSignupPayload) {
+        if (userRepository.existsByEmail(userSignupPayload.getEmail())) {
             throw new IllegalStateException("This email is already taken");
         }
-        if (!userSignupRequest.getPassword().equals(userSignupRequest.getPasswordConfirmation())) {
+        if (!userSignupPayload.getPassword().equals(userSignupPayload.getPasswordConfirmation())) {
             throw new IllegalStateException("Password and password confirmation do not match");
         }
 
-        userSignupRequest.setPassword(passwordEncoder.encode(userSignupRequest.getPassword()));
-        User newUser = userMapper.toEntity(userSignupRequest);
+        userSignupPayload.setPassword(passwordEncoder.encode(userSignupPayload.getPassword()));
+        User newUser = userMapper.toEntity(userSignupPayload);
         Set<Role> roles = Set.of(Role.ROLE_USER);
         newUser.setRoles(roles);
 

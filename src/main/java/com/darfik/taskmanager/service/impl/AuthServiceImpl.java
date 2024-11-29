@@ -1,7 +1,7 @@
 package com.darfik.taskmanager.service.impl;
 
 import com.darfik.taskmanager.dto.auth.JwtResponse;
-import com.darfik.taskmanager.dto.auth.UserSignupRequest;
+import com.darfik.taskmanager.dto.auth.UserSignupPayload;
 import com.darfik.taskmanager.entity.User;
 import com.darfik.taskmanager.security.JwtTokenProvider;
 import com.darfik.taskmanager.service.AuthService;
@@ -21,7 +21,7 @@ public class AuthServiceImpl implements AuthService {
 
 
     @Override
-    public JwtResponse login(UserSignupRequest loginRequest) {
+    public JwtResponse login(UserSignupPayload loginRequest) {
         JwtResponse jwtResponse = new JwtResponse();
         authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(

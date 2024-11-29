@@ -1,7 +1,7 @@
 package com.darfik.taskmanager.controller;
 
 import com.darfik.taskmanager.dto.auth.JwtResponse;
-import com.darfik.taskmanager.dto.auth.UserSignupRequest;
+import com.darfik.taskmanager.dto.auth.UserSignupPayload;
 import com.darfik.taskmanager.dto.auth.UserSignupResponse;
 import com.darfik.taskmanager.service.AuthService;
 import com.darfik.taskmanager.service.UserService;
@@ -27,12 +27,12 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public JwtResponse login(@RequestBody UserSignupRequest loginRequest) {
+    public JwtResponse login(@RequestBody UserSignupPayload loginRequest) {
         return authService.login(loginRequest);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserSignupResponse> register(@Valid @RequestBody UserSignupRequest userSignupRequest,
+    public ResponseEntity<UserSignupResponse> register(@Valid @RequestBody UserSignupPayload userSignupPayload,
                                             BindingResult bindingResult,
                                             UriComponentsBuilder uriComponentsBuilder) throws BindException {
         if (bindingResult.hasErrors()) {
@@ -42,7 +42,7 @@ public class AuthController {
                 throw new BindException(bindingResult);
             }
         } else {
-            UserSignupResponse responseUserDto = userService.create(userSignupRequest);
+            UserSignupResponse responseUserDto = userService.create(userSignupPayload);
             return ResponseEntity
                     .created(uriComponentsBuilder
                             .replacePath("/api/v1/users/{userId}")
