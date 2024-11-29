@@ -2,7 +2,6 @@ package com.darfik.taskmanager.controller;
 
 import com.darfik.taskmanager.dto.task.TaskResponse;
 import com.darfik.taskmanager.dto.task.UpdateTaskPayload;
-import com.darfik.taskmanager.entity.Task;
 import com.darfik.taskmanager.service.TaskService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

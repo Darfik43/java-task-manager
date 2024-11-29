@@ -1,7 +1,6 @@
 package com.darfik.taskmanager.service;
 
 import com.darfik.taskmanager.dto.task.TaskResponse;
-import com.darfik.taskmanager.entity.Task;
 
 import java.util.List;
 import java.util.Optional;
