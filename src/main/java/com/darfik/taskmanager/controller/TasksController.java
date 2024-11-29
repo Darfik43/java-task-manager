@@ -1,7 +1,7 @@
 package com.darfik.taskmanager.controller;
 
 import com.darfik.taskmanager.dto.task.NewTaskPayload;
-import com.darfik.taskmanager.entity.Task;
+import com.darfik.taskmanager.dto.task.TaskResponse;
 import com.darfik.taskmanager.service.TaskService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class TasksController {
     private final TaskService taskService;
 
     @GetMapping
-    public List<Task> findTasks() {
+    public List<TaskResponse> findTasks() {
         return taskService.findAllTasks();
     }
 
@@ -37,7 +37,7 @@ public class TasksController {
                 throw new BindException(bindingResult);
             }
         } else {
-            Task task = this.taskService.createTask(newTaskPayload.title(), newTaskPayload.details());
+            TaskResponse task = this.taskService.createTask(newTaskPayload.title(), newTaskPayload.details());
             return ResponseEntity
                     .created(uriComponentsBuilder
                             .replacePath("/api/v1/tasks/{taskId}")

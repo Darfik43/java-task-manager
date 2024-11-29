@@ -1,5 +1,6 @@
 package com.darfik.taskmanager.controller;
 
+import com.darfik.taskmanager.dto.task.TaskResponse;
 import com.darfik.taskmanager.dto.task.UpdateTaskPayload;
 import com.darfik.taskmanager.entity.Task;
 import com.darfik.taskmanager.service.TaskService;
@@ -22,15 +23,15 @@ public class TaskController {
     private final TaskService taskService;
 
     @ModelAttribute
-    public Task getTask(@PathVariable("taskId") Long taskId) {
+    public TaskResponse getTask(@PathVariable("taskId") Long taskId) {
         return this.taskService.findTask(taskId)
                 .orElseThrow(() -> new NoSuchElementException("Task is not found"));
     }
 
-    @GetMapping
-    public Task findProduct(@ModelAttribute("task") Task task) {
-        return task;
-    }
+//    @GetMapping
+//    public TaskResponse findTask(@ModelAttribute("task") Task task) {
+//        return task;
+//    } Ochen' bol'shoy vopros k etoy ruchke
 
     @PatchMapping
     public ResponseEntity<?> updateTask(@PathVariable("taskId") Long taskId,
