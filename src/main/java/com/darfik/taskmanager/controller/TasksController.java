@@ -43,7 +43,6 @@ public class TasksController {
                             .replacePath("/api/v1/tasks/{taskId}")
                             .build(Map.of("taskId", task.getId())))
                     .body(task);
-
         }
     }
 
