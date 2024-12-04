@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/user")
 @RequiredArgsConstructor
 public class UserController {
+    // Now returns entity itself just to test, must be changed
 
     private final UserService userService;
 
-    // Now returns entity itself just to test, must be changed
+
     @GetMapping
     public User getUser(Authentication authentication) {
         return userService.getByUsername(authentication.getName());
