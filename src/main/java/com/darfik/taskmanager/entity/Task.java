@@ -21,4 +21,6 @@ public class Task {
 
     private String details;
 
+    private boolean isFinished;
+
 }
