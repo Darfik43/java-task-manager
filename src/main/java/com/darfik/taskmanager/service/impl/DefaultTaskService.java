@@ -1,6 +1,8 @@
 package com.darfik.taskmanager.service.impl;
 
+import com.darfik.taskmanager.dto.task.NewTaskPayload;
 import com.darfik.taskmanager.dto.task.TaskResponse;
+import com.darfik.taskmanager.dto.task.UpdateTaskPayload;
 import com.darfik.taskmanager.entity.Task;
 import com.darfik.taskmanager.mapper.TaskMapper;
 import com.darfik.taskmanager.repository.TaskRepository;
@@ -27,8 +29,9 @@ public class DefaultTaskService implements TaskService {
     }
 
     @Override
-    public TaskResponse createTask(String title, String details) {
-        return taskMapper.toDto(taskRepository.save(new Task(null, title, details)));
+    public TaskResponse createTask(NewTaskPayload newTaskPayload) {
+        return taskMapper.toDto(taskRepository.save(new Task(null, newTaskPayload.title(),
+                newTaskPayload.details(), false)));
     }
 
     // Nizhe bol'shoy vopros a nahuya vozvrashat' optionl
@@ -41,11 +44,12 @@ public class DefaultTaskService implements TaskService {
     }
 
     @Override
-    public void updateTask(Long id, String title, String details) {
+    public void updateTask(Long id, UpdateTaskPayload updateTaskPayload) {
         this.taskRepository.findById(id)
                 .ifPresentOrElse(task -> {
-                    task.setTitle(title);
-                    task.setDetails(details);
+                    task.setTitle(updateTaskPayload.title());
+                    task.setDetails(updateTaskPayload.details());
+                    task.setFinished(updateTaskPayload.isFinished());
                     // Tut vopros a gde update v db, kak budto
                     // prosto polya obnovlyaem u exemplyara bez obnoveniy v tablice :)))
                 }, () -> {

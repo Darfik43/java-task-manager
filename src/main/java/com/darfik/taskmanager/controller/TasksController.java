@@ -37,7 +37,7 @@ public class TasksController {
                 throw new BindException(bindingResult);
             }
         } else {
-            TaskResponse task = this.taskService.createTask(newTaskPayload.title(), newTaskPayload.details());
+            TaskResponse task = this.taskService.createTask(newTaskPayload);
             return ResponseEntity
                     .created(uriComponentsBuilder
                             .replacePath("/api/v1/tasks/{taskId}")

@@ -44,7 +44,7 @@ public class TaskController {
             }
         } else {
             this.taskService
-                    .updateTask(taskId, updateTaskPayload.title(), updateTaskPayload.details());
+                    .updateTask(taskId, updateTaskPayload);
             return ResponseEntity.noContent()
                     .build();
         }
