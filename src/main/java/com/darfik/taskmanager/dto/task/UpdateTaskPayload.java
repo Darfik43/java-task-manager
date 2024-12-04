@@ -8,6 +8,8 @@ public record UpdateTaskPayload(
         @Size(min = 3, max = 50, message = "Details can not be more than 50 symbols and less than 3 symbols")
         String title,
         @Size(max = 1000, message = "Details can not be more than 1000 symbols")
-        String details
+        String details,
+
+        boolean isFinished
 ) {
 }
