@@ -50,8 +50,7 @@ public class DefaultTaskService implements TaskService {
                     task.setTitle(updateTaskPayload.title());
                     task.setDetails(updateTaskPayload.details());
                     task.setFinished(updateTaskPayload.isFinished());
-                    // Tut vopros a gde update v db, kak budto
-                    // prosto polya obnovlyaem u exemplyara bez obnoveniy v tablice :)))
+                    this.taskRepository.save(task);
                 }, () -> {
                     throw new NoSuchElementException();
                 });
