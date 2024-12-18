@@ -21,16 +21,16 @@ public class TaskController {
 
     private final TaskService taskService;
 
-    @ModelAttribute
+    @ModelAttribute("task")
     public TaskResponse getTask(@PathVariable("taskId") Long taskId) {
         return this.taskService.findTask(taskId)
                 .orElseThrow(() -> new NoSuchElementException("Task is not found"));
     }
 
-//    @GetMapping
-//    public TaskResponse findTask(@ModelAttribute("task") Task task) {
-//        return task;
-//    } Ochen' bol'shoy vopros k etoy ruchke
+    @GetMapping
+    public TaskResponse findTask(@ModelAttribute("task") TaskResponse task) {
+        return task;
+    }
 
     @PatchMapping
     public ResponseEntity<?> updateTask(@PathVariable("taskId") Long taskId,
