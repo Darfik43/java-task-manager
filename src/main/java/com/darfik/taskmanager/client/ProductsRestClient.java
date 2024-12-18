@@ -13,7 +13,7 @@ public interface ProductsRestClient {
 
     Optional<Task> findTask(Long taskId);
 
-    void updateTask(Long taskId, String title, String details);
+    void updateTask(Long taskId, String title, String details, boolean isFinished);
 
     void deleteProduct(Long taskId);
 
