@@ -2,7 +2,6 @@ package com.darfik.taskmanager.service.impl;
 
 import com.darfik.taskmanager.dto.auth.UserSignupPayload;
 import com.darfik.taskmanager.dto.auth.UserSignupResponse;
-import com.darfik.taskmanager.entity.Role;
 import com.darfik.taskmanager.entity.TaskUser;
 import com.darfik.taskmanager.mapper.UserMapper;
 import com.darfik.taskmanager.repository.RoleRepository;
