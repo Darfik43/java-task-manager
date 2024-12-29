@@ -1,6 +1,7 @@
 package com.darfik.taskmanager.controller;
 
 import com.darfik.taskmanager.dto.auth.JwtResponse;
+import com.darfik.taskmanager.dto.auth.UserLoginPayload;
 import com.darfik.taskmanager.dto.auth.UserSignupPayload;
 import com.darfik.taskmanager.dto.auth.UserSignupResponse;
 import com.darfik.taskmanager.service.AuthService;
@@ -27,7 +28,7 @@ public class AuthController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public JwtResponse login(@RequestBody UserSignupPayload loginRequest) {
+    public JwtResponse login(@RequestBody UserLoginPayload loginRequest) {
         return authService.login(loginRequest);
     }
 
