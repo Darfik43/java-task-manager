@@ -46,6 +46,7 @@ public class ApplicationConfig {
                     corsConfiguration.addAllowedOrigin("http://localhost:3000");
                     corsConfiguration.addAllowedMethod("*");
                     corsConfiguration.addAllowedHeader("*");
+                    corsConfiguration.setAllowCredentials(true);
                     return corsConfiguration;
                 }))
                 .httpBasic(AbstractHttpConfigurer::disable)
