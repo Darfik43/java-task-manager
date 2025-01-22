@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableTransactionManagement
 public class TaskManagerApplication {
-
+//TODO email confirm; scheduler for emails; exceptions
     public static void main(String[] args) {
         SpringApplication.run(TaskManagerApplication.class, args);
     }
